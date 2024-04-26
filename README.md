@@ -1,0 +1,1 @@
+I have completed the requirements of the test task. You can also take a look at my project [OneDayCar](https://github.com/Andriy0660/OneDayCar) that I am currently developing, where much more technology is used. I also have basic knowledge of React, as I write the frontend for my project using React and related technologies.
