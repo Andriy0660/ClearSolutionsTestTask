@@ -50,9 +50,6 @@ public class UserController {
             @RequestParam(name = "from") LocalDate from,
             @RequestParam(name = "to") LocalDate to) {
 
-        if (from.isAfter(to))
-            throw new BadRequestException("`From` must be less than `To`");
-
         List<UserDto> users = userService.searchByBirthDateRange(from, to);
         return ResponseEntity.ok(users);
     }

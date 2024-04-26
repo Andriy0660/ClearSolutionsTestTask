@@ -8,6 +8,8 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.sql.SQLException;
+
 @AllArgsConstructor
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -18,6 +20,11 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<?> handleNotFoundException(NotFoundException ex) {
+        return ExceptionBuilder.buildExceptionResponse(ex, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(SQLException.class)
+    public ResponseEntity<?> handleSqlException(SQLException ex) {
         return ExceptionBuilder.buildExceptionResponse(ex, HttpStatus.BAD_REQUEST);
     }
 

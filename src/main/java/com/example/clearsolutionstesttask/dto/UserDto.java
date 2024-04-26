@@ -16,6 +16,7 @@ import java.time.LocalDate;
 @Builder
 public class UserDto {
     @Email(regexp = ".+@.+\\..+", message = "Invalid email format")
+    @NotBlank(message = "Email can not be blank")
     private String email;
 
     @NotBlank(message = "First name can not be blank")

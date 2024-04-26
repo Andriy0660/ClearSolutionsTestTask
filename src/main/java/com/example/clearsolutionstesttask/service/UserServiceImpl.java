@@ -63,12 +63,12 @@ public class UserServiceImpl implements UserService {
         validateBirthDate(birthDate);
 
         if (existsUserByEmail(email)) {
-            if(!email.equals(user.getEmail()))
+            if (!email.equals(user.getEmail()))
                 throw new BadRequestException("The email is already used");
         }
 
         if (existsUserByPhone(phone) && phone != null) {
-            if(!phone.equals(user.getPhone()))
+            if (!phone.equals(user.getPhone()))
                 throw new BadRequestException("The phone is already used");
         }
         user.setFirstName(userDto.getFirstName());
@@ -98,6 +98,9 @@ public class UserServiceImpl implements UserService {
     }
 
     public List<UserDto> searchByBirthDateRange(LocalDate from, LocalDate to) {
+        if (from.isAfter(to))
+            throw new BadRequestException("`From` must be less than `To`");
+
         return userRepository.findAllByBirthDateBetween(from, to).stream()
                 .map(user -> UserDto.builder()
                         .email(user.getEmail())
